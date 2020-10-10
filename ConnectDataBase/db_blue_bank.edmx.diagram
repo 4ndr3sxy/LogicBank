@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="001faa0986154f3983e344f0f716c66e" Name="Diagram1" />
+      <Diagram DiagramId="2e2675b3b4744416899bc0ad727423e5" Name="Diagram1">
+        <EntityTypeShape EntityType="db_blue_bankModel.account" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_blue_bankModel.user" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="db_blue_bankModel.FK__accounts__fk_use__1367E606" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
