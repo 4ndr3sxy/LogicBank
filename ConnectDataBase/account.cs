@@ -14,7 +14,7 @@ namespace ConnectDataBase
     
     public partial class account
     {
-        public System.Guid id { get; set; }
+        public string id { get; set; }
         public int balance { get; set; }
         public string fk_user_id { get; set; }
         public Nullable<System.DateTime> date_created { get; set; }

@@ -16,11 +16,22 @@ namespace BluBank.Controllers
         [HttpGet]
         public IEnumerable<user> Get()
         {
+            //return new string[] { "value1", "value2" };
             using (db_blue_bankEntities userEntities = new db_blue_bankEntities())
             {
                 return userEntities.users.ToList();
             }
         }
+        [HttpGet]
+        public user Get(string id)
+        {
+            //return new string[] { "value1", "value2" };
+            using (db_blue_bankEntities userEntities = new db_blue_bankEntities())
+            {
+                return userEntities.users.FirstOrDefault(x => x.id == id);
+            }
+        }
+
 
         //Add new user
         [HttpPost]

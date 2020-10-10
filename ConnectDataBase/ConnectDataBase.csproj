@@ -95,6 +95,7 @@
       <LastGenOutput>db_blue_bank.Context.cs</LastGenOutput>
       <DependentUpon>db_blue_bank.edmx</DependentUpon>
     </Content>
+    <Content Include="db_blue_bank.edmx.sql" />
     <Content Include="db_blue_bank.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>db_blue_bank.edmx</DependentUpon>

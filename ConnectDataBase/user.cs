@@ -28,7 +28,7 @@ namespace ConnectDataBase
         public string city { get; set; }
         public string country { get; set; }
         public string user_login { get; set; }
-        public byte[] password_login { get; set; }
+        public string password_login { get; set; }
         public Nullable<System.DateTime> date_created { get; set; }
         public Nullable<System.DateTime> date_updated { get; set; }
     
