@@ -25,5 +25,7 @@ namespace ConnectDataBase
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<account> accounts { get; set; }
+        public virtual DbSet<user> users { get; set; }
     }
 }

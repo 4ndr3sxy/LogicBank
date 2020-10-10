@@ -4,20 +4,141 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_blue_bankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="db_blue_bankModelStoreContainer" />
+      <Schema Namespace="db_blue_bankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="balance" Type="int" Nullable="false" />
+          <Property Name="fk_user_id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="date_created" Type="date" />
+          <Property Name="date_updated" Type="date" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="64" />
+          <Property Name="addres" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="user_login" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="password_login" Type="varbinary(max)" Nullable="false" />
+          <Property Name="date_created" Type="date" />
+          <Property Name="date_updated" Type="date" />
+        </EntityType>
+        <Association Name="FK__accounts__fk_use__1367E606">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="fk_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_blue_bankModelStoreContainer">
+          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__accounts__fk_use__1367E606" Association="Self.FK__accounts__fk_use__1367E606">
+            <End Role="users" EntitySet="users" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_blue_bankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="db_blue_bankEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="balance" Type="Int32" Nullable="false" />
+          <Property Name="fk_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Precision="0" />
+          <Property Name="date_updated" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="user" Relationship="Self.FK__accounts__fk_use__1367E606" FromRole="accounts" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="addres" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_login" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_login" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Precision="0" />
+          <Property Name="date_updated" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="accounts" Relationship="Self.FK__accounts__fk_use__1367E606" FromRole="users" ToRole="accounts" />
+        </EntityType>
+        <Association Name="FK__accounts__fk_use__1367E606">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="accounts" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="fk_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_blue_bankEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__accounts__fk_use__1367E606" Association="Self.FK__accounts__fk_use__1367E606">
+            <End Role="users" EntitySet="users" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="db_blue_bankModelStoreContainer" CdmEntityContainer="db_blue_bankEntities" />
+        <EntityContainerMapping StorageEntityContainer="db_blue_bankModelStoreContainer" CdmEntityContainer="db_blue_bankEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="db_blue_bankModel.account">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="fk_user_id" ColumnName="fk_user_id" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="date_updated" ColumnName="date_updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="db_blue_bankModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="addres" ColumnName="addres" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="password_login" ColumnName="password_login" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="date_updated" ColumnName="date_updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

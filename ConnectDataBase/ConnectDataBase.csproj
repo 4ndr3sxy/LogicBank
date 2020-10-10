@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="account.cs">
+      <DependentUpon>db_blue_bank.tt</DependentUpon>
+    </Compile>
     <Compile Include="db_blue_bank.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,6 +69,12 @@
       <DependentUpon>db_blue_bank.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="user.cs">
+      <DependentUpon>db_blue_bank.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="db_blue_bank.edmx">
@@ -91,9 +100,6 @@
       <DependentUpon>db_blue_bank.edmx</DependentUpon>
       <LastGenOutput>db_blue_bank.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
