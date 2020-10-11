@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_blue_bankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="db_blue_bankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="balance" Type="int" Nullable="false" />
           <Property Name="fk_user_id" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="date_created" Type="date" />
@@ -27,11 +27,11 @@
           <Property Name="city" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="country" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="user_login" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="password_login" Type="varbinary(max)" Nullable="false" />
+          <Property Name="password_login" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="date_created" Type="date" />
           <Property Name="date_updated" Type="date" />
         </EntityType>
-        <Association Name="FK__accounts__fk_use__1367E606">
+        <Association Name="FK__accounts__fk_use__38996AB5">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -46,13 +46,12 @@
         <EntityContainer Name="db_blue_bankModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__accounts__fk_use__1367E606" Association="Self.FK__accounts__fk_use__1367E606">
+          <AssociationSet Name="FK__accounts__fk_use__38996AB5" Association="Self.FK__accounts__fk_use__38996AB5">
             <End Role="users" EntitySet="users" />
             <End Role="accounts" EntitySet="accounts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_blue_bankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -60,7 +59,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
           <Property Name="balance" Type="Int32" Nullable="false" />
           <Property Name="fk_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_created" Type="DateTime" Precision="0" />
@@ -79,7 +78,7 @@
           <Property Name="city" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="country" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="user_login" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password_login" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="password_login" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
           <Property Name="date_created" Type="DateTime" Precision="0" />
           <Property Name="date_updated" Type="DateTime" Precision="0" />
           <NavigationProperty Name="accounts" Relationship="Self.FK__accounts__fk_use__1367E606" FromRole="users" ToRole="accounts" />
