@@ -12,9 +12,11 @@ namespace BluBank.Controllers
 {
     public class AccountController : ApiController
     {
+        //creation model factory and context initial
         private db_blue_bankEntities dbContext = new db_blue_bankEntities();
-        ModelFactory _mf;
+        ModelFactory _mf;//ModelFactory intermediary between model of EF and Controller
 
+        //builder
         public AccountController()
         {
             _mf = new ModelFactory();
@@ -24,6 +26,7 @@ namespace BluBank.Controllers
         [HttpGet]
         public IEnumerable<AccountModel> Get(string id)
         {
+            //repository added to erre in loop of references between user and account
             Repository r = new Repository();
             return r.getAccount(id).ToList().Select(x => _mf.CreateA(x));
         }
@@ -44,29 +47,33 @@ namespace BluBank.Controllers
             }
         }
 
+        //update account
         [HttpPut]
-        public IHttpActionResult UpdateAccount(string id, string type, [FromBody] account acc)
+        public IHttpActionResult UpdateAccount(string id, [FromBody] AccountTransactionModel accT)
         {
             Boolean getAccount = dbContext.accounts.Count(x => x.id == id) > 0;
-            int nBalance = 0;
-            
+
             if (getAccount)
             {
-                IEnumerable<AccountModel> varAccounts = Get(id);
-                AccountModel ac = varAccounts.First();
-                nBalance = ac.balance;
-                switch (type)
+                //get account to update
+                account accountObj = dbContext.accounts.Find(id);
+
+                //scaled to more options
+                switch (accT.TypeT)
                 {
+                    //consign
                     case "c":
-                        acc.balance = acc.balance + nBalance;
+                        accountObj.balance += accT.Money;
                         break;
+                    //remove
                     case "r":
-                        acc.balance = acc.balance - nBalance;
+                        accountObj.balance -= accT.Money ;
                         break;
                     default:
                         return NotFound();
                 }
-                dbContext.Entry(acc).State = EntityState.Modified;
+                //update
+                dbContext.Entry(accountObj).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 return Ok();
             }
@@ -76,15 +83,17 @@ namespace BluBank.Controllers
             }
         }
 
-        //delete user
+        //delete account
         [HttpDelete]
-        public IHttpActionResult DeleteUser(string id)
+        public IHttpActionResult DeleteAccount(string id)
         {
-            var usr = dbContext.users.Find(id);
+            //get account
+            var usr = dbContext.accounts.Find(id);
 
             if (usr != null)
             {
-                dbContext.users.Remove(usr);
+                //delete
+                dbContext.accounts.Remove(usr);
                 dbContext.SaveChanges();
                 return Ok(usr);
             }
