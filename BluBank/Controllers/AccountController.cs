@@ -47,10 +47,25 @@ namespace BluBank.Controllers
         [HttpPut]
         public IHttpActionResult UpdateAccount(string id, string type, [FromBody] account acc)
         {
-            var getAccount = dbContext.accounts.Count(x => x.id == id) > 0;
-
+            Boolean getAccount = dbContext.accounts.Count(x => x.id == id) > 0;
+            int nBalance = 0;
+            
             if (getAccount)
             {
+                IEnumerable<AccountModel> varAccounts = Get(id);
+                AccountModel ac = varAccounts.First();
+                nBalance = ac.balance;
+                switch (type)
+                {
+                    case "c":
+                        acc.balance = acc.balance + nBalance;
+                        break;
+                    case "r":
+                        acc.balance = acc.balance - nBalance;
+                        break;
+                    default:
+                        return NotFound();
+                }
                 dbContext.Entry(acc).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 return Ok();
