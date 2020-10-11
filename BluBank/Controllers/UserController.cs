@@ -32,6 +32,13 @@ namespace BluBank.Controllers
             }*/
         }
 
+        [HttpGet]
+        public IEnumerable<UserModel> Get(string id)
+        {
+            Repository r = new Repository();
+            return r.getUser(id).ToList().Select(x => _mf.Create(x));
+        }
+
         //Add new user
         [HttpPost]
         public IHttpActionResult AddUser([FromBody]user usr)

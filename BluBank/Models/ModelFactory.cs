@@ -23,11 +23,11 @@ namespace BluBank.Models
                 password_login = usr.password_login,
                 date_created =(DateTime) usr.date_created,
                 date_updated =(DateTime) usr.date_updated,
-                accounts = usr.accounts.Select(a => Create(a))
+                accounts = usr.accounts.Select(a => CreateA(a))
             };
         }
 
-        public AccountModel Create(account acc)
+        private AccountModel CreateA(account acc)
         {
             return new AccountModel()
             {
