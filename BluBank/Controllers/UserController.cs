@@ -5,20 +5,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ConnectDataBase;
+using BluBank.Models;
 
 namespace BluBank.Controllers
 {
     public class UserController : ApiController
     {
         private db_blue_bankEntities dbContext = new db_blue_bankEntities();
+        ModelFactory _mf;
+
+        public UserController()
+        {
+            _mf = new ModelFactory();
+        }
 
         //get users createds
         [HttpGet]
-        public IEnumerable<user> Get()
+        public IEnumerable<UserModel> Get()
         {
             using (db_blue_bankEntities userEntities = new db_blue_bankEntities())
             {
-                return userEntities.users.ToList();
+                return userEntities.users.ToList().Select(x => _mf.Create(x));
             }
         }
 
