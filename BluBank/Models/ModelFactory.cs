@@ -20,7 +20,9 @@ namespace BluBank.Models
                 city = usr.city,
                 country = usr.country,
                 user_login = usr.user_login,
-
+                password_login = usr.password_login,
+                date_created =(DateTime) usr.date_created,
+                date_updated =(DateTime) usr.date_updated
             };
         }
     }
