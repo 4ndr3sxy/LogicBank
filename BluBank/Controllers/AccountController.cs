@@ -10,40 +10,33 @@ using System.Data.Entity;
 
 namespace BluBank.Controllers
 {
-    public class UserController : ApiController
+    public class AccountController : ApiController
     {
         private db_blue_bankEntities dbContext = new db_blue_bankEntities();
         ModelFactory _mf;
 
-        public UserController()
+        public AccountController()
         {
             _mf = new ModelFactory();
         }
 
-        //get users createds
+        //get Account unique 
         [HttpGet]
-        public IEnumerable<UserModel> Get()
+        public IEnumerable<AccountModel> Get(string id)
         {
             Repository r = new Repository();
-            return r.getUsers().ToList().Select(x => _mf.CreateU(x));
+            return r.getAccount(id).ToList().Select(x => _mf.CreateA(x));
         }
 
-        [HttpGet]
-        public IEnumerable<UserModel> Get(string id)
-        {
-            Repository r = new Repository();
-            return r.getUser(id).ToList().Select(x => _mf.CreateU(x));
-        }
-
-        //Add new user
+        //Add new Account
         [HttpPost]
-        public IHttpActionResult AddUser([FromBody]user usr)
+        public IHttpActionResult AddAccount([FromBody]account acc)
         {
             if (ModelState.IsValid)
             {
-                dbContext.users.Add(usr);
+                dbContext.accounts.Add(acc);
                 dbContext.SaveChanges();
-                return Ok(usr);
+                return Ok(acc);
             }
             else
             {
@@ -52,13 +45,13 @@ namespace BluBank.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateUser(String id,[FromBody] user usr)
+        public IHttpActionResult UpdateAccount(string id, string type, [FromBody] account acc)
         {
-            var getUser = dbContext.users.Count(x => x.id == id) > 0;
+            var getAccount = dbContext.accounts.Count(x => x.id == id) > 0;
 
-            if (getUser)
+            if (getAccount)
             {
-                dbContext.Entry(usr).State = EntityState.Modified;
+                dbContext.Entry(acc).State = EntityState.Modified;
                 dbContext.SaveChanges();
                 return Ok();
             }
@@ -70,11 +63,11 @@ namespace BluBank.Controllers
 
         //delete user
         [HttpDelete]
-        public IHttpActionResult DeleteUser(String id)
+        public IHttpActionResult DeleteUser(string id)
         {
             var usr = dbContext.users.Find(id);
 
-            if(usr != null)
+            if (usr != null)
             {
                 dbContext.users.Remove(usr);
                 dbContext.SaveChanges();

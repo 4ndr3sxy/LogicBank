@@ -17,7 +17,13 @@ namespace ConnectDataBase
         public IQueryable<user> getUser(String id)
         {
             db_blue_bankEntities ctx = new db_blue_bankEntities();
-            return ctx.users.Where(X => X.id == id).Select(x=>x);
+            return ctx.users.Where(x => x.id == id).Select(x=>x);
+        }
+
+        public IQueryable<account> getAccount(String id)
+        {
+            db_blue_bankEntities ctx = new db_blue_bankEntities();
+            return ctx.accounts.Where(x => x.id == id).Select(x => x);
         }
     }
 }

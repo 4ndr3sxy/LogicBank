@@ -8,7 +8,7 @@ namespace BluBank.Models
 {
     public class ModelFactory
     {
-        public UserModel Create(user usr)
+        public UserModel CreateU(user usr)
         {
             return new UserModel()
             {
@@ -27,7 +27,7 @@ namespace BluBank.Models
             };
         }
 
-        private AccountModel CreateA(account acc)
+        public AccountModel CreateA(account acc)
         {
             return new AccountModel()
             {
