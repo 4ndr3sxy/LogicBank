@@ -23,10 +23,13 @@ namespace BluBank.Controllers
         [HttpGet]
         public IEnumerable<UserModel> Get()
         {
+            Repository r = new Repository();
+            return r.getUsers().ToList().Select(x => _mf.Create(x));
+            /*
             using (db_blue_bankEntities userEntities = new db_blue_bankEntities())
             {
                 return userEntities.users.ToList().Select(x => _mf.Create(x));
-            }
+            }*/
         }
 
         //Add new user

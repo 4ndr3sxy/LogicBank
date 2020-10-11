@@ -69,6 +69,7 @@
       <DependentUpon>db_blue_bank.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="user.cs">
       <DependentUpon>db_blue_bank.tt</DependentUpon>
     </Compile>
