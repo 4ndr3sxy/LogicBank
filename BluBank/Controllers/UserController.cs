@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ConnectDataBase;
 using BluBank.Models;
+using System.Data.Entity;
 
 namespace BluBank.Controllers
 {
@@ -25,11 +26,6 @@ namespace BluBank.Controllers
         {
             Repository r = new Repository();
             return r.getUsers().ToList().Select(x => _mf.Create(x));
-            /*
-            using (db_blue_bankEntities userEntities = new db_blue_bankEntities())
-            {
-                return userEntities.users.ToList().Select(x => _mf.Create(x));
-            }*/
         }
 
         [HttpGet]
@@ -52,6 +48,23 @@ namespace BluBank.Controllers
             else
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateUser(String id,[FromBody] user usr)
+        {
+            var getUser = dbContext.users.Count(x => x.id == id) > 0;
+
+            if (getUser)
+            {
+                dbContext.Entry(usr).State = EntityState.Modified;
+                dbContext.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
             }
         }
 
