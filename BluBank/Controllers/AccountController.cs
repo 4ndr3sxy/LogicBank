@@ -74,7 +74,17 @@ namespace BluBank.Controllers
                         break;
                     //remove
                     case "r":
-                        accountObj.balance -= accT.Money ;
+                        if(accountObj.balance > accT.Money || accT.Money >= 10000)
+                        {
+                            accountObj.balance -= accT.Money;
+                        }
+                        else
+                        {
+                            logLog4Net.log.Error("Monto a retirar mayor al dinero en cuenta o retiro menor al establecido.\n" +
+                                " Error en cuenta id: " + id);
+                            return NotFound();
+                        }
+                        
                         break;
                     default:
                         logLog4Net.log.Error("Tipo de transaccion incorrecta para id:"+id);
