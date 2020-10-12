@@ -1,6 +1,6 @@
 -Ejecutar aplicativo:
   Gestor DB SQL Server: ejecutar script de ruta /scriptDB/script_Db_BlueBank.sql
-  Clonar Brach master del repositorio en Visual Studio .Net
+  Clonar Branch master del repositorio en Visual Studio .Net
 -Arquitectura planteada:
   Uso de modelo relacional, entre usuario y cuentas, siendo: "Un usuario puede tener muchas cuentas, pero una cuenta solo la puedfe tener un usuario"; relacion (users) de 1 a M (accounts)
 -Tecnologias seleccionadas:
