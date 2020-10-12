@@ -1,0 +1,22 @@
+
+2020-10-12 10:21:57,544 [6] INFO BluBank.logLog4Net - Test ingreso a get Account
+2020-10-12 10:39:30,830 [7] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=232323323232
+2020-10-12 10:40:15,060 [6] INFO BluBank.logLog4Net - Ingreso a POST([FromBody]account acc) en Account con informacion:
+ id:123456789
+ saldo:0
+ cuenta de id:111111
+ fecha creado:1/20/2020 12:00:00 AM
+ fecha actualizacion:1/20/2020 12:00:00 AM
+2020-10-12 10:40:15,355 [6] INFO BluBank.logLog4Net - Cuenta con id 123456789 agregado exitosamente
+2020-10-12 10:40:39,830 [6] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:e
+ cantidad dinero:80000
+2020-10-12 10:40:40,072 [6] ERROR BluBank.logLog4Net - Tipo de transaccion incorrecta para id:1111122222
+2020-10-12 10:40:49,368 [6] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:c
+ cantidad dinero:55000
+2020-10-12 10:40:49,407 [6] INFO BluBank.logLog4Net - PUT realizado exitosamente de id:1111122222
+2020-10-12 10:41:01,370 [8] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:r
+ cantidad dinero:20000
+2020-10-12 10:41:01,378 [8] INFO BluBank.logLog4Net - PUT realizado exitosamente de id:1111122222
