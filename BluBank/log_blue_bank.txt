@@ -43,3 +43,4 @@
  cantidad dinero:80000
 2020-10-12 11:23:53,109 [34] ERROR BluBank.logLog4Net - Tipo de transaccion incorrecta para id:222223333ABC
 2020-10-12 11:41:05,147 [37] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=222223333ABC
+2020-10-12 12:27:13,889 [6] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=1111122222
