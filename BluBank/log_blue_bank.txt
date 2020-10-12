@@ -66,3 +66,19 @@
  cantidad dinero:9500
 2020-10-12 12:43:24,205 [5] INFO BluBank.logLog4Net - PUT realizado exitosamente de id:090909AAA
 2020-10-12 12:43:38,308 [5] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=090909AAA
+2020-10-12 12:48:35,928 [6] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:r
+ cantidad dinero:9500
+2020-10-12 12:48:38,673 [6] INFO BluBank.logLog4Net - PUT realizado exitosamente de id:090909AAA
+2020-10-12 12:49:26,157 [7] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:r
+ cantidad dinero:9500
+2020-10-12 12:49:28,640 [7] ERROR BluBank.logLog4Net - Monto a retirar mayor al dinero en cuenta o retiro menor al establecido.
+ Error en cuenta id: 090909AAA
+2020-10-12 12:49:36,891 [6] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=090909AAA
+2020-10-12 12:49:42,683 [6] INFO BluBank.logLog4Net - Ingreso a PUT(string id, [FromBody] AccountTransactionModel accT) en Account con informacion:
+ tipo transaccion:r
+ cantidad dinero:9500
+2020-10-12 12:49:42,688 [6] ERROR BluBank.logLog4Net - Monto a retirar mayor al dinero en cuenta o retiro menor al establecido.
+ Error en cuenta id: 090909AAA
+2020-10-12 12:49:57,459 [6] INFO BluBank.logLog4Net - Ingreso a GET(string id) en Account con valor de id=090909AAA

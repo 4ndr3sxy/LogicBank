@@ -74,7 +74,7 @@ namespace BluBank.Controllers
                         break;
                     //remove
                     case "r":
-                        if(accountObj.balance > accT.Money || accT.Money >= 10000)
+                        if(accountObj.balance > accT.Money && accT.Money >= 10000)
                         {
                             accountObj.balance -= accT.Money;
                         }
